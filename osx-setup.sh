@@ -30,6 +30,7 @@ formulae=(
   docker
   elixir
   fd
+  fzf
   git
   gnupg
   gnutls
@@ -81,13 +82,17 @@ chsh -s /usr/local/bin/zsh
 apps=(
   1password
   1password-cli
+  bitbar
   brave-browser
   docker
   iterm2
+  nordvpn
   postman
   spotify
+  tor-browser
   vagrant
   virtualbox
+  zoom
 )
 
 echo "installing apps with Cask..."
