@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo "Creating an SSH key for you..."
 ssh-keygen -t ed25519 -a 100
 
