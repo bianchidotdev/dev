@@ -7,12 +7,13 @@
 ########## Variables
 
 # Set the location of the repository on github
-repository_location="michaeldbianchi/dotfiles"
-repository_branch="master"
+repository_location="michaeldbianchi/dev"
+repository_branch="main"
 
-dir=${HOME}/.dotfiles                    # dotfiles directory
+repo_dir=${HOME}/dev
+dir=${repo_dir}/dotfiles                    # dotfiles directory
 bckdir=${HOME}/.bck_dotfiles             # old dotfiles backup directory
-files="bashrc bash_profile bash_aliases bash_prompt vimrc vim config pryrc psqlrc zshrc zsh_aliases zsh_vars zsh_functions tmux.conf fzf.zsh"    # list of files/folders to symlink in homedir
+files="bashrc bash_prompt vimrc config psqlrc zshrc sh_aliases sh_opploans sh_profile tmux.conf fzf.zsh"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -24,15 +25,15 @@ if (( $? != 0 )) ; then
 fi
 
 # Clone dotfiles if they aren't present
-if [ ! -d "$dir" ]; then
+if [ ! -d "$repo_dir" ]; then
     # Clone the dotfiles
     echo Cloning remote dotfiles...
-    git clone --recursive https://github.com/${repository_location} -b ${repository_branch} ${HOME}/.dotfiles
+    git clone --recursive https://github.com/${repository_location} -b ${repository_branch} $repo_dir
     git_exit_status=$?
 fi
 
 # Pull the most updated copy
-cd $dir && git pull
+cd $repo_dir && git pull
 git_exit_status=$?
 
 # If the clone/pull operation failed, exit with the exit status provided by git
