@@ -40,6 +40,7 @@ formulae=(
   jq
   kubernetes-cli
   legit
+  minikube
   pulumi
   rbenv
   readline
