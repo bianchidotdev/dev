@@ -99,7 +99,17 @@ apps=(
 echo "installing apps with Cask..."
 brew cask install ${apps[@]}
 
+echo "installing apps that require manual taps"
+brew tap federico-terzi/espanso
+brew install espanso
+espanso register
+read -p "Press [Enter] key after enabling accessibility..."
+espanso start
+
 brew cleanup
+
+# Iterm2 setup
+ln -s  ~/workspace/dev/dotfiles/iterm-profiles.json '/Library/Application Support/iTerm2/DynamicProfiles/blualism.json'
 
 echo "Setting some Mac settings..."
 #"Setting screenshots location to ~/Desktop"
@@ -107,4 +117,8 @@ defaults write com.apple.screencapture location -string "$HOME/Documents"
 
 echo "Done!"
 
-echo "Still need to install keybase (cask didn't support fs)
+echo "Still need to install keybase (cask didn't support fs)"
+echo "Run `keybase pgp pull-private --all` after installation"
+echo "Need to disable adding period after double space"
+echo "Install vscode manually since brew cask doesn't handle updates well"
+echo "Need to install magnet from apple app store"
