@@ -1,5 +1,5 @@
 echo "Creating an SSH key for you..."
-ssh-keygen -t rsa
+ssh-keygen -t ed25519 -a 100
 
 echo "Please add this public key to Github \n"
 echo "https://github.com/account/ssh \n"
@@ -21,6 +21,35 @@ brew update
 
 echo "Installing Git..."
 brew install git
+# CLI Tools
+formulae=(
+  coreutils
+  docker
+  elixir
+  git
+  gnupg
+  gnutls
+  go
+  helm
+  httpie
+  jq
+  kubernetes-cli
+  legit
+  pulumi
+  rbenv
+  readline
+  ruby-build
+  sqlite
+  tmux
+  tmuxinator
+  watch
+  wget
+  zsh
+)
+
+echo "Installing other brew stuff..."
+brew install ${formulae[@]}
+
 
 echo "Git config"
 
@@ -28,29 +57,13 @@ git config --global user.name "Michael Bianchi"
 git config --global user.email michaeldbianchi@gmail.com
 
 
-echo "Installing brew git utilities..."
-brew install legit
-
-echo "Installing other brew stuff..."
-brew install wget
-# brew install mackup
-brew install rbenv
-brew install nvm
-
-
 #@TODO install our custom fonts and stuff
-
-echo "Cleaning up brew"
-brew cleanup
-
-echo "Installing homebrew cask"
-brew install caskroom/cask/brew-cask
 
 echo "Copying dotfiles from Github"
 cd ~
-git clone git@github.com:michaeldbianchi/dotfiles.git .dotfiles
-cd .dotfiles
-sh symdotfiles
+git clone git@github.com:michaeldbianchi/dotfiles.git dotfiles
+cd dotfiles
+sh install.sh
 
 
 echo "Setting ZSH as shell..."
@@ -58,27 +71,21 @@ chsh -s /usr/local/bin/zsh
 
 # Apps
 apps=(
+  1password
+  1password-cli
+  brave-browser
+  docker
+  iterm2
+  postman
   spotify
   vagrant
-  iterm2
   virtualbox
-  onepassword
 )
 
 echo "installing apps with Cask..."
 brew cask install ${apps[@]}
 
-brew cask alfred link
-
-brew cask cleanup
 brew cleanup
-
-echo "Please setup and sync Dropbox, and then run this script again."
-read -p "Press [Enter] key after this..."
-
-echo "Restoring setup from Mackup..."
-#mackup restore @TODO uncomment
-
 
 echo "Setting some Mac settings..."
 #"Setting screenshots location to ~/Desktop"
