@@ -1,0 +1,7 @@
+# shell agnostic loading
+source ~/.sh_profile
+
+# Opt for starship instead
+# source ~/.bash_prompt
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

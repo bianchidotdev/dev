@@ -25,9 +25,11 @@ echo "Installing Git..."
 brew install git
 # CLI Tools
 formulae=(
+  bat
   coreutils
   docker
   elixir
+  fd
   git
   gnupg
   gnutls
@@ -42,6 +44,8 @@ formulae=(
   readline
   ruby-build
   sqlite
+  starship
+  terminal-notifier
   tmux
   tmuxinator
   watch
@@ -63,9 +67,11 @@ git config --global user.email michaeldbianchi@gmail.com
 
 echo "Copying dotfiles from Github"
 cd ~
-git clone git@github.com:michaeldbianchi/dotfiles.git dotfiles
-cd dotfiles
-sh install.sh
+mkdir -p workspace
+cd workspace
+git clone git@github.com:michaeldbianchi/dev.git
+cd dev
+sh dotfiles/install.sh
 
 
 echo "Setting ZSH as shell..."
@@ -94,3 +100,5 @@ echo "Setting some Mac settings..."
 defaults write com.apple.screencapture location -string "$HOME/Documents"
 
 echo "Done!"
+
+echo "Still need to install keybase (cask didn't support fs)

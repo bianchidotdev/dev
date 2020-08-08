@@ -1,0 +1,82 @@
+# export COLOR_NC='\e[0m' # No Color
+# export COLOR_WHITE='\e[1;37m'
+# export COLOR_BLACK='\e[0;30m'
+# export COLOR_BLUE='\e[0;34m'
+# export COLOR_LIGHT_BLUE='\e[1;34m'
+# export COLOR_GREEN='\e[0;32m'
+# export COLOR_LIGHT_GREEN='\e[1;32m'
+# export COLOR_CYAN='\e[0;36m'
+# export COLOR_LIGHT_CYAN='\e[1;36m'
+# export COLOR_RED='\e[0;31m'
+# export COLOR_LIGHT_RED='\e[1;31m'
+# export COLOR_PURPLE='\e[0;35m'
+# export COLOR_LIGHT_PURPLE='\e[1;35m'
+# export COLOR_BROWN='\e[0;33m'
+# export COLOR_YELLOW='\e[1;33m'
+# export COLOR_GRAY='\e[0;30m'
+# export COLOR_LIGHT_GRAY='\e[0;37m'
+
+export COLOR_DEFAULT = ${c::default}
+
+# source FLAT 6/10 https://htmlcolorcodes.com/color-chart/
+export COLOR_FLAT_RED = ${c::0xC0392B}
+export COLOR_FLAT_PURPLE = ${c::0xC0392B}
+export COLOR_FLAT_BLUE = ${c::0x2980B9}
+export COLOR_FLAT_TURQUOISE = ${c::0x1ABC9C}
+export COLOR_FLAT_GREEN = ${c::0x27AE60}
+export COLOR_FLAT_YELLOW = ${c::0xF1C40F}
+export COLOR_FLAT_ORANGE = ${c::0xE67E22}
+export COLOR_FLAT_WHITE = ${c::0xECF0F1}
+export COLOR_FLAT_GREY = ${c::0x95A5A6}
+export COLOR_FLAT_BLACK = ${c::0x34495E}
+
+# source MATERIAL 500 weight https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+export COLOR_MAT_RED = ${c::0xF44336}
+export COLOR_MAT_PINK = ${c::0xE91E63}
+export COLOR_MAT_PURPLE = ${c::0x9C27B0}
+export COLOR_MAT_DEEP_PURPLE = ${c::0x673AB7}
+export COLOR_MAT_INDIGO = ${c::0x3F51B5}
+export COLOR_MAT_BLUE = ${c::0x2196F3}
+export COLOR_MAT_LIGHT_BLUE = ${c::0x03A9F4}
+export COLOR_MAT_CYAN = ${c::0x00BCD4}
+export COLOR_MAT_TEAL = ${c::0x009688}
+export COLOR_MAT_GREEN = ${c::0x4CAF50}
+export COLOR_MAT_LIGHT_GREEN = ${c::0x8BC34A}
+export COLOR_MAT_LIME = ${c::0xCDDC39}
+export COLOR_MAT_YELLOW = ${c::0xFFEB3B}
+export COLOR_MAT_AMBER = ${c::0xFFC107}
+export COLOR_MAT_ORANGE = ${c::0xFF9800}
+export COLOR_MAT_DEEP_ORANGE = ${c::0xFF5722}
+export COLOR_MAT_BROWN = ${c::0x795548}
+export COLOR_MAT_GREY = ${c::0x9E9E9E}
+export COLOR_MAT_BLUE_GREY = ${c::0x607D8B}
+export COLOR_MAT_BLACK = ${c::0x000000}
+export COLOR_MAT_WHITE = ${c::0xFFFFFF}
+
+# source FISH https://github.com/fish-shell/fish-shell/blob/03bca5f7ddf974535cc9c66272406d2d05ae77e3/share/tools/web_config/js/colorutils.js#L196-L223
+export COLOR_FISH_BLACK = ${c::0x000000}
+export COLOR_FISH_RED = ${c::0x800000}
+export COLOR_FISH_GREEN = ${c::0x008000}
+export COLOR_FISH_BROWN = ${c::0x725000}
+export COLOR_FISH_YELLOW = ${c::0x808000}
+export COLOR_FISH_BLUE = ${c::0x000080}
+export COLOR_FISH_MAGENTA = ${c::0x800080}
+export COLOR_FISH_PURPLE = ${c::0x800080}
+export COLOR_FISH_CYAN = ${c::0x008080}
+export COLOR_FISH_WHITE = ${c::0xc0c0c0}
+export COLOR_FISH_GREY = ${c::0xe5e5e5}
+
+export COLOR_FISH_COMMAND = ${c::0x005fd7}
+export COLOR_FISH_PARAM = ${c::0x00afff}
+export COLOR_FISH_REDIRECTION = ${c::0x00afff}
+export COLOR_FISH_COMMENT = ${c::0x990000}
+export COLOR_FISH_ERROR = ${c::0xff0000}
+export COLOR_FISH_ESCAPE = ${c::0x00a6b2}
+export COLOR_FISH_QUOTE = ${c::0x999900}
+
+# source EASTER https://hookagency.com/website-color-schemes/
+export COLOR_EASTER_GREEN = ${c::0x8bf0ba}
+export COLOR_EASTER_BLUE = ${c::0x0e0fed}
+export COLOR_EASTER_BLUES = ${c::0x94f0f1}
+export COLOR_EASTER_PINK = ${c::0xf2b1d8}
+export COLOR_EASTER_YELLOW = ${c::0xffdc6a}

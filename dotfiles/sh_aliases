@@ -1,0 +1,34 @@
+alias venv='source venv/bin/activate'
+
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+alias cd..='cd ..'
+
+alias g=git
+alias v=vim
+alias vi=vim
+
+alias exa='exa -al --git'
+
+alias b='bundle'
+alias be='bundle exec'
+
+alias dc='docker-compose'
+
+alias k='kubectl'
+
+alias slt="sumolivetail"
+
+alias google-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias chrome='google-chrome'
+
+alias kb='keybase'
+alias kbfs='cd /Volumes/Keybase'
+alias kbpr='cd /Volumes/Keybase/private/michaeldbianchi'
+alias kbpu='cd /Volumes/Keybase/public/michaeldbianchi'
+
+alias timestamp='date +"%Y%m%d%H%M"'
+
+alias ul='ultralist'
+

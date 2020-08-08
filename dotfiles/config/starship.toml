@@ -1,0 +1,60 @@
+prompt_order = [
+  "character",
+  "username",
+  "kubernetes",
+  "directory",
+  "git_branch",
+  "git_status",
+  "docker_context",
+  "package",
+  "nodejs",
+  "elixir",
+  "ruby",
+  "rust",
+  "python",
+  "golang",
+  "cmd_duration",
+  "line_break",
+  "jobs",
+  "battery",
+]
+
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Replace the "➜" symbol in the prompt with "❯"
+[character]      # The name of the module we are confguring is "character"
+symbol = " λ"     # The "symbol" segment is being set to "❯"
+error_symbol = " λ"
+use_symbol_for_status = true
+
+[directory]
+truncation_length = 5
+truncate_to_repo = false
+
+
+[git_status]
+#conflicted = "🏳"
+#ahead = "🏎💨"
+#behind = "😰"
+#diverged = "😵"
+#untracked = "🤷‍"
+#stashed = "📦"
+#modified = "📝"
+#added = "➕"
+#renamed = "👅"
+#deleted = "🗑"
+
+[kubernetes]
+disabled = false
+symbol = ""
+
+[line_break]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = false
+

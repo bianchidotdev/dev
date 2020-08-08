@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+
+## First, do `brew install terminal-notifier`
+
+notifier=terminal-notifier
+
+brew update
+doctor=`brew doctor 2>&1`
+
+if [[ $doctor != *"Your system is ready to brew."* ]]; then
+  $notifier \
+    -group net.codeworkshop.homebrewupdate \
+    -title "Homebrew is broken!" \
+    -message "$doctor" \
+    -activate com.google.code.iterm2
+    exit 1;
+fi
+
+outdated=`brew outdated | sort | tr '\n' ' '`
+
+if [ ! -z "$outdated" ]; then
+    $notifier \
+        -group net.codeworkshop.homebrewupdate \
+        -title "Homebrew Updates Available" \
+        -message "$outdated" \
+        -activate com.googlecode.iterm2
+fi

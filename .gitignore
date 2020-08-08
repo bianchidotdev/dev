@@ -1,0 +1,5 @@
+plugged/
+configstore/
+fishd.*
+vim/.netrwhist
+config/netlify

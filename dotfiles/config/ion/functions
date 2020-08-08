@@ -1,0 +1,17 @@
+
+
+fn minify_swd
+  let miniswd = @split(${SWD} "/")[-1]
+	let minidirs = []
+  for dir in @split(${SWD} "/")
+    if not is $dir @split(${SWD} "/")[-1]
+      let minidirs ++= $dir[0]
+    end
+  end
+	let minidirsstr = $join(minidirs "/")
+	if test -n $minidirsstr
+		let miniswd ::= "${minidirsstr}/"
+  end
+	echo -n $miniswd
+end
+

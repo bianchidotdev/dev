@@ -1,0 +1,73 @@
+# OppLoans specific shell config
+export PATH="$HOME/.harold/bin:$PATH"
+
+alias shivalogs='slt "_sourceCategory=prod/shiva/logs"'
+alias widlarlogs='slt "_sourceCategory=prod/widlar/logs"'
+
+alias reporting='psql -h reporting.ckpglb17yttu.us-east-1.rds.amazonaws.com -U mbianchi reporting'
+
+alias awscreds='python3 ~/.aws/onelogin/onelogin-aws-assume-role.py'
+
+# The tfdo function is used to encapsulate the command line parameters to include the correct tfvars files in the correct order based on established patterns matching:
+# - ${github_repo}/iac/env/${github_repo_tolder} is where terraform is executed from
+# - ${github_repo_path} is always prefixed with iac and looks like iac/${github_repo_tolder}
+# - ${github_repo}/iac/env/${github_repo_tolder} has a backend.tfvars file
+# - ${github_repo}/iac/env/${github_repo_tolder} optionally has a variables.tfvars
+#
+function tfdo {
+  local -r tf_do_current_dir="${PWD##*/}"
+  local releative_path="../../../${PWD##*/}"
+  local -r tf_do_action=$1
+  local tf_do_var_file="variables.tfvars"
+  local tf_do_cmd_switch="var-file"
+  local parent_slash_child="${PWD##*env/}"
+  local parent_only="${parent_slash_child%/*}"
+  local tf_timestamp="$(date +%Y.%m.%d-%H:%M:%S)"
+
+  if [[ "$parent_only" == *prod* ]] || [[ "$parent_only" == *demo* ]]; then
+    echo "============================================================"
+    echo "WARNING you are executing tfdo against a production like environment using the following: "
+    echo " "
+    echo "  Account alias:          $(aws iam list-account-aliases | jq -r '.AccountAliases[0]')"
+    echo "  Token caller identity:  $(aws sts get-caller-identity | jq -r '.Arn' ) "
+    echo "  Environment:            $parent_only"
+    echo "  Timestamp:              $tf_timestamp"
+    echo "============================================================"
+
+    read -p "Continue (y/n)?" choice
+    case "$choice" in
+      y|Y ) echo "yes";;
+      n|N ) echo "no"; return;;
+      * ) echo "invalid";;
+    esac
+  else
+    echo "============================================================"
+    echo "Executing tfdo against the following environment: "
+    echo " "
+    echo "  Account alias:          $(aws iam list-account-aliases | jq -r '.AccountAliases[0]')"
+    echo "  Token caller identity:  $(aws sts get-caller-identity | jq -r '.Arn' ) "
+    echo "  Environment:            $parent_only"
+    echo "  Timestamp:              $tf_timestamp"
+    echo "============================================================"
+  fi
+
+  if [ "init" '==' "$1" ]; then
+    #rm -rf .terraform
+    tf_do_var_file="backend.tfvars"
+    tf_do_cmd_switch="backend-config"
+  fi
+  local base_var_file_cmd="-$tf_do_cmd_switch=../$tf_do_var_file"
+  if [ "apply" '==' "$1" ] && [ "-aa" '==' "$2" ]; then
+    local base_var_file_cmd="-auto-approve $base_var_file_cmd"
+  fi
+  local nested_var_file_cmd=""
+  if [ -f "$tf_do_var_file" ]; then
+    local nested_var_file_cmd="-$tf_do_cmd_switch=$tf_do_var_file"
+    echo "tfdo - terraform $1 $base_var_file_cmd $nested_var_file_cmd $releative_path"
+    terraform "$1" $base_var_file_cmd $nested_var_file_cmd $releative_path
+  else
+    echo "tfdo - terraform $1 $base_var_file_cmd $releative_path"
+    terraform "$1" $base_var_file_cmd $releative_path
+  fi
+  echo "============================================================"
+}

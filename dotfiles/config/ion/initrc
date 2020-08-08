@@ -1,0 +1,25 @@
+# Setup of initrc for Ion Shell
+# 1. SET PATH
+# 2. SOURCE aliases
+# 3. SOURCE functions
+# 4. SET PROMPT
+
+# SET PATH and other ENV vars
+let PATH = $PATH
+let PATH = "/usr/local/bin:$PATH"
+let PATH = "/usr/local/sbin:$PATH"
+let PATH = "$HOME/.cargo/bin:$PATH"
+let PATH = "$HOME/.rbenv/shims:$PATH"
+export PATH
+
+let NVM_DIR="$HOME/.nvm"
+export HOST="localhost"
+
+# SOURCE aliases
+source "$HOME/.config/ion/aliases"
+
+# SOURCE functions
+source "$HOME/.config/ion/functions"
+
+# SET PROMPT
+source "$HOME/.config/ion/prompt"

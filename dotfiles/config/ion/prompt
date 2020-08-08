@@ -1,0 +1,5 @@
+source "$HOME/.config/ion/colors"
+
+fn PROMPT
+  echo -n "${COLOR_FLAT_BLUE} λ ${COLOR_MAT_BLUE}$(minify_swd)${COLOR_DEFAULT} "
+end
