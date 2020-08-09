@@ -10,8 +10,10 @@ if [[ ! -f $HOME/.ssh/id_ed25519 ]]; then
   read -p "Press [Enter] key after this..."
 fi
 
-echo "Installing xcode-stuff"
-xcode-select --install
+if [[ $(xcode-select -p 1>/dev/null) ]]; then
+  echo "Installing xcode-stuff"
+  xcode-select --install
+fi
 
 # Check for Homebrew,
 # Install if we don't have it
@@ -59,11 +61,19 @@ formulae=(
   zsh
 )
 
+# bc for some reason brew list takes close to a full second
+installed=$(brew list)
+
 echo "Installing other brew stuff..."
-brew install ${formulae[@]}
+for i in "${formulae[@]}"; do
+  if ! echo $installed | grep "$i" > /dev/null; then
+    brew install $i
+  fi
+done
 
-echo "Git config"
+echo "Configuring git"
 
+git config --global pull.rebase false
 git config --global user.name "Michael Bianchi"
 git config --global user.email michaeldbianchi@gmail.com
 git config --global user.signingkey 792AB06934ACCEB8
@@ -83,8 +93,8 @@ cd dev
 sh dotfiles/install.sh
 
 
-echo "Setting ZSH as shell..."
 if [[ ! $(grep "/usr/local/bin/zsh" /etc/shells) ]]; then
+  echo "Setting ZSH as shell..."
   sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
 fi
 
@@ -109,15 +119,22 @@ apps=(
   zoom
 )
 
-echo "installing apps with Cask..."
-brew cask install ${apps[@]}
+installed_casks=$(brew cask list)
 
-echo "installing apps that require manual taps"
+echo "installing apps with Cask..."
+for i in "${apps[@]}"; do
+  if ! echo $installed_casks | grep "$i" > /dev/null; then
+    brew cask install $i
+  fi
+done
+
 if test ! $(which espanso); then
+  echo "installing apps that require manual taps"
   brew tap federico-terzi/espanso
   brew install espanso
 fi
 if [[ $(espanso status) != *"running" ]]; then
+  echo "Configuring espanso"
   espanso register
   read -p "Press [Enter] key after enabling accessibility..."
   espanso start
