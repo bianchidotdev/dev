@@ -1,35 +1,58 @@
 #!/usr/bin/env bash
 
+repo_dir=$HOME/workspace/dev
+source $repo_dir/dotfiles/sh_profile
+notifier=terminal-notifier
+
 function log {
   echo ""
-  echo "----- $1 -----"
+  echo "$timestamp ----- $1 -----"
 }
 
-if [[ ! -f $HOME/.ssh/id_ed25519 ]]; then
-  log "Creating an SSH key ..."
-  ssh-keygen -t ed25519 -a 100
+function timestamp {
+  date +"%Y-%m-%dT%H:%M:%S"
+}
 
-  echo "Please add this public key to Github \n"
-  cat $HOME/.ssh/id_ed25519.pub
-  echo "https://github.com/account/ssh \n"
-  read -p "Press [Enter] key after this..."
-fi
+function notify {
+  echo "OSX Setup Script Broken - Notifying with $notifier"
+  >&2 echo "$1"
+  $notifier \
+    -title "OSX Setup Script Broken!" \
+    -message "$1" \
+    -activate com.google.code.iterm2
+}
+
+
+log "Starting OSX Setup Script"
 
 if [[ $(xcode-select -p 1>/dev/null) ]]; then
   log "Installing xcode-stuff"
-  xcode-select --install
+  xcode_err=`xcode-select --install 2>&1`
+  if [ $? -ne 0 ]; then
+    notify "$xcode_err"
+    exit 1;
+  fi 
 fi
 
 # Check for Homebrew,
 # Install if we don't have it
 if test ! $(which brew); then
   log "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew_err=`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2>&1`
+  if [ $? -ne 0 ]; then
+    notify "$brew_err"
+    exit 1;
+  fi 
 fi
 
 # Update homebrew recipes
 log "Updating homebrew"
-brew update
+
+brew_err=`brew update 2>&1`
+if [ $? -ne 0 ]; then
+  notify "$brew_err"
+  exit 1;
+fi 
 
 # CLI Tools
 formulae=(
@@ -72,7 +95,11 @@ installed=$(brew list)
 log "Installing brew formulae"
 for i in "${formulae[@]}"; do
   if ! echo $installed | grep "$i" > /dev/null; then
-    brew install $i
+    brew_err=`brew install $i 2>&1`
+    if [ $? -ne 0 ]; then
+      notify "$brew_err"
+      exit 1;
+    fi 
   fi
 done
 
@@ -83,31 +110,6 @@ git config --global user.name "Michael Bianchi"
 git config --global user.email michaeldbianchi@gmail.com
 git config --global user.signingkey 792AB06934ACCEB8
 git config --global commit.gpgsign true
-
-
-#@TODO install our custom fonts and stuff
-
-log "Installing dotfiles"
-cd $HOME
-mkdir -p workspace
-cd workspace
-if [[ ! -d ./dev ]]; then
-  echo "Copying dotfiles from Github"
-  git clone git@github.com:michaeldbianchi/dev.git
-fi
-cd dev
-sh dotfiles/install.sh
-echo "Successfully installed dotfiles"
-
-log "Setting up zsh"
-if [[ ! $(grep "/usr/local/bin/zsh" /etc/shells) ]]; then
-  echo "Setting ZSH as shell..."
-  sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
-fi
-
-if [[ ! $SHELL = "/usr/local/bin/zsh" ]]; then
-  chsh -s /usr/local/bin/zsh
-fi
 
 # Apps
 apps=(
@@ -157,7 +159,7 @@ brew cleanup
 if [[ ! -f "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json" ]]; then
   log "Configuring iterm2 dynamic profile"
   mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
-  ln -s  $HOME/workspace/dev/dotfiles/iterm-profiles.json "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json"
+  ln -s  $repo_dir/dotfiles/iterm-profiles.json "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json"
 fi
 
 log "Setting OSX settings"
@@ -165,6 +167,49 @@ log "Setting OSX settings"
 if [[ $(defaults read com.apple.screencapture location) != "$HOME/Documents" ]]; then
   defaults write com.apple.screencapture location -string "$HOME/Documents"
 fi
+
+#@TODO install our custom fonts and stuff
+
+# Interactive shell only
+if [ "`tty`" != "not a tty" ]; then
+  log "Interactive Shell Section"
+
+  if [[ ! -f $HOME/.ssh/id_ed25519 ]]; then
+    log "Creating an SSH key ..."
+    ssh-keygen -t ed25519 -a 100
+
+    echo "Please add this public key to Github \n"
+    cat $HOME/.ssh/id_ed25519.pub
+    echo "https://github.com/account/ssh \n"
+    read -p "Press [Enter] key after this..."
+  fi
+
+  log "Installing dotfiles"
+  cd $HOME
+  mkdir -p workspace
+  cd workspace
+  if [[ ! -d ./dev ]]; then
+    echo "Copying dotfiles from Github"
+    git clone git@github.com:michaeldbianchi/dev.git
+  fi
+  cd dev
+  sh dotfiles/install.sh
+  echo "Successfully installed dotfiles"
+
+  log "Setting up zsh"
+  if [[ ! $(grep "/usr/local/bin/zsh" /etc/shells) ]]; then
+    echo "Setting ZSH as shell..."
+    sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
+  fi
+
+  if [[ ! $SHELL = "/usr/local/bin/zsh" ]]; then
+    chsh -s /usr/local/bin/zsh
+  fi
+
+  log "Configuring cron"
+  (crontab -l ; cat $repo_dir/control/crontab) | sort - | uniq - | crontab -
+fi
+
 
 echo ""
 echo "Done!"

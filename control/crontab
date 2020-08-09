@@ -1,0 +1,1 @@
+*/5 * * * * $HOME/workspace/dev/osx-setup.sh >> $HOME/workspace/dev/log/install.log 2>> $HOME/workspace/dev/log/install.error.log

@@ -12,3 +12,4 @@ cd dev
 - Output text and error logs to files that can be used for debugging
 - Set up iterm notifier when something is broken
 - Add in `brew doctor` and `brew outdated` tasks
+- Fix VSCode settings transfer
