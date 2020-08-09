@@ -3,3 +3,6 @@ configstore/
 fishd.*
 vim/.netrwhist
 config/netlify
+dotfiles/gnupg/*
+!dotfiles/gnupg/gpg.conf
+!dotfiles/gnupg/gpg-agent.conf

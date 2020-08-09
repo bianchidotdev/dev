@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
-echo "Creating an SSH key for you..."
-ssh-keygen -t ed25519 -a 100
+if [[ ! -f $HOME/.ssh/id_ed25519 ]]; then
+  echo "Creating an SSH key for you..."
+  ssh-keygen -t ed25519 -a 100
 
-echo "Please add this public key to Github \n"
-echo "https://github.com/account/ssh \n"
-read -p "Press [Enter] key after this..."
+  echo "Please add this public key to Github \n"
+  cat $HOME/.ssh/id_ed25519.pub
+  echo "https://github.com/account/ssh \n"
+  read -p "Press [Enter] key after this..."
+fi
 
 echo "Installing xcode-stuff"
 xcode-select --install
@@ -21,14 +24,13 @@ fi
 echo "Updating homebrew..."
 brew update
 
-echo "Installing Git..."
-brew install git
 # CLI Tools
 formulae=(
   bat
   coreutils
   docker
   elixir
+  exa
   fd
   fzf
   git
@@ -41,12 +43,14 @@ formulae=(
   kubernetes-cli
   legit
   minikube
+  pinentry-mac
   pulumi
   rbenv
   readline
   ruby-build
   sqlite
   starship
+  tealdeer
   terminal-notifier
   tmux
   tmuxinator
@@ -58,26 +62,35 @@ formulae=(
 echo "Installing other brew stuff..."
 brew install ${formulae[@]}
 
-
 echo "Git config"
 
 git config --global user.name "Michael Bianchi"
 git config --global user.email michaeldbianchi@gmail.com
+git config --global user.signingkey 792AB06934ACCEB8
+git config --global commit.gpgsign true
 
 
 #@TODO install our custom fonts and stuff
 
 echo "Copying dotfiles from Github"
-cd ~
+cd $HOME
 mkdir -p workspace
 cd workspace
-git clone git@github.com:michaeldbianchi/dev.git
+if [[ ! -d ./dev ]]; then
+  git clone git@github.com:michaeldbianchi/dev.git
+fi
 cd dev
 sh dotfiles/install.sh
 
 
 echo "Setting ZSH as shell..."
-chsh -s /usr/local/bin/zsh
+if [[ ! $(grep "/usr/local/bin/zsh" /etc/shells) ]]; then
+  sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
+fi
+
+if [[ ! $SHELL = "/usr/local/bin/zsh" ]]; then
+  chsh -s /usr/local/bin/zsh
+fi
 
 # Apps
 apps=(
@@ -100,26 +113,43 @@ echo "installing apps with Cask..."
 brew cask install ${apps[@]}
 
 echo "installing apps that require manual taps"
-brew tap federico-terzi/espanso
-brew install espanso
-espanso register
-read -p "Press [Enter] key after enabling accessibility..."
-espanso start
+if test ! $(which espanso); then
+  brew tap federico-terzi/espanso
+  brew install espanso
+fi
+if [[ $(espanso status) != *"running" ]]; then
+  espanso register
+  read -p "Press [Enter] key after enabling accessibility..."
+  espanso start
+fi
+
+tldr --update
 
 brew cleanup
 
 # Iterm2 setup
-ln -s  ~/workspace/dev/dotfiles/iterm-profiles.json '/Library/Application Support/iTerm2/DynamicProfiles/blualism.json'
+if [[ ! -f "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json" ]]; then
+  mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+  ln -s  $HOME/workspace/dev/dotfiles/iterm-profiles.json "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json"
+fi
 
 echo "Setting some Mac settings..."
-#"Setting screenshots location to ~/Desktop"
-defaults write com.apple.screencapture location -string "$HOME/Documents"
+#"Setting screenshots location to $HOME/Desktop"
+if [[ $(defaults read com.apple.screencapture location) != "$HOME/Documents" ]]; then
+  defaults write com.apple.screencapture location -string "$HOME/Documents"
+fi
 
-echo "Done!"
+if test ! $(which keybase); then
+  echo "Still need to install keybase (cask didn't support fs)"
+  echo "Run 'keybase pgp pull-private --all' after installation"
+fi
 
-echo "Still need to install keybase (cask didn't support fs)"
-echo "Run `keybase pgp pull-private --all` after installation"
+if test ! $(which code); then
+  echo "Install vscode manually since brew cask doesn't handle updates well"
+fi
+
 echo "Need to disable adding period after double space"
-echo "Install vscode manually since brew cask doesn't handle updates well"
 echo "Need to install magnet from apple app store"
 echo "Brave add-ons Eno, 1Password, Pocket, Wikibuy"
+
+echo "Done!"

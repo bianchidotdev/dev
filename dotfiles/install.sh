@@ -10,10 +10,10 @@
 repository_location="michaeldbianchi/dev"
 repository_branch="main"
 
-repo_dir=${HOME}/dev
+repo_dir=${HOME}/workspace/dev
 dir=${repo_dir}/dotfiles                    # dotfiles directory
 bckdir=${HOME}/.bck_dotfiles             # old dotfiles backup directory
-files="bashrc bash_prompt vimrc config psqlrc zshrc sh_aliases sh_opploans sh_profile tmux.conf fzf.zsh"    # list of files/folders to symlink in homedir
+files="bashrc bash_prompt config fzf.zsh gnupg psqlrc sh_aliases sh_opploans sh_profile tmux.conf vimrc zshrc"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -55,7 +55,7 @@ for file in $files; do
 				mv ${HOME}/.$file $bckdir/$file
 		fi
     echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ${HOME}/.$file
+    ln -sf $dir/$file ${HOME}/.$file
 done
 
 vim +PlugInstall +qall
