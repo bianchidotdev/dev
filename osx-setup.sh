@@ -56,6 +56,7 @@ fi
 
 # CLI Tools
 formulae=(
+  act
   bat
   coreutils
   docker
@@ -63,6 +64,7 @@ formulae=(
   exa
   fd
   fzf
+  gatsby-cli
   git
   gnupg
   gnutls
@@ -121,6 +123,7 @@ apps=(
   iterm2
   nordvpn
   postman
+  slack
   spotify
   tor-browser
   vagrant

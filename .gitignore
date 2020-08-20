@@ -8,3 +8,5 @@ dotfiles/gnupg/*
 !dotfiles/gnupg/gpg-agent.conf
 log/*
 !log/.keep
+dotfiles/config/gatsby/*
+!dotfiles/config/gatsby/config.json
