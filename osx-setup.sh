@@ -121,7 +121,6 @@ apps=(
   brave-browser
   docker
   iterm2
-  nordvpn
   postman
   slack
   spotify
@@ -225,6 +224,10 @@ fi
 
 if test ! $(which code); then
   echo "Install vscode manually since brew cask doesn't handle updates well"
+fi
+
+if [[ $(fd 'nord.*\.app$' /Applications/ | wc -l) -lt 1 ]]; then
+  echo 'Install Nord VPN manually via App Store'
 fi
 
 echo "Need to disable adding period after double space"
