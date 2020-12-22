@@ -32,3 +32,6 @@ alias timestamp='date +"%Y%m%d%H%M"'
 
 alias ul='ultralist'
 
+alias import_env='source ~/.scripts/import_envvars.sh'
+
+alias mux=tmuxinator

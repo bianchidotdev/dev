@@ -1,23 +1,23 @@
-prompt_order = [
-  "character",
-  "username",
-  "kubernetes",
-  "directory",
-  "git_branch",
-  "git_status",
-  "docker_context",
-  "package",
-  "nodejs",
-  "elixir",
-  "ruby",
-  "rust",
-  "python",
-  "golang",
-  "cmd_duration",
-  "line_break",
-  "jobs",
-  "battery",
-]
+format = """\
+  $character\
+  $username\
+  $kubernetes\
+  $directory\
+  $git_branch\
+  $git_status\
+  $docker_context\
+  $package\
+  $nodejs\
+  $elixir\
+  $ruby\
+  $rust\
+  $python\
+  $golang\
+  $cmd_duration\
+  $line_break\
+  $jobs\
+  $battery\
+  """
 
 # Don't print a new line at the start of the prompt
 add_newline = false

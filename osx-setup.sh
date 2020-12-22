@@ -92,12 +92,12 @@ formulae=(
 )
 
 # bc for some reason brew list takes close to a full second
-installed=$(brew list)
+installed=$(brew list --formula)
 
 log "Installing brew formulae"
 for i in "${formulae[@]}"; do
   if ! echo $installed | grep "$i" > /dev/null; then
-    brew_err=`brew install $i 2>&1`
+    brew_err=`brew install --formula $i 2>&1`
     if [ $? -ne 0 ]; then
       notify "$brew_err"
       exit 1;
@@ -130,26 +130,26 @@ apps=(
   zoom
 )
 
-installed_casks=$(brew cask list)
+installed_casks=$(brew list --casks)
 
 log "Installing brew casks"
 for i in "${apps[@]}"; do
   if ! echo $installed_casks | grep "$i" > /dev/null; then
-    brew cask install $i
+    brew install --cask $i
   fi
 done
 
-log "Installing brew manual taps"
-if test ! $(which espanso); then
-  brew tap federico-terzi/espanso
-  brew install espanso
-fi
-if [[ $(espanso status) != *"running" ]]; then
-  log "Configuring espanso"
-  espanso register
-  read -p "Press [Enter] key after enabling accessibility..."
-  espanso start
-fi
+# log "Installing brew manual taps"
+# if test ! $(which espanso); then
+#   brew tap federico-terzi/espanso
+#   brew install espanso
+# fi
+# if [[ $(espanso status) != *"running" ]]; then
+#   log "Configuring espanso"
+#   espanso register
+#   read -p "Press [Enter] key after enabling accessibility..."
+#   espanso start
+# fi
 
 log "Updating tldr"
 tldr --update
