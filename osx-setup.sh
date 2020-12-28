@@ -57,6 +57,7 @@ fi
 # CLI Tools
 formulae=(
   act
+  asdf
   bat
   coreutils
   docker
@@ -122,7 +123,6 @@ apps=(
   docker
   iterm2
   postman
-  slack
   spotify
   tor-browser
   vagrant
@@ -230,6 +230,7 @@ if [[ $(fd 'nord.*\.app$' /Applications/ | wc -l) -lt 1 ]]; then
   echo 'Install Nord VPN manually via App Store'
 fi
 
+echo "Need to install slack manually for easier updates"
 echo "Need to disable adding period after double space"
 echo "Need to install magnet from apple app store"
 echo "Brave add-ons Eno, 1Password, Pocket, Wikibuy"
