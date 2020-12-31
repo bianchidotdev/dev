@@ -9,7 +9,6 @@ export VISUAL=vim
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=$HOME/.google-cloud-sdk/bin:$PATH
 export PATH=$PATH:$HOME/go/bin
 
@@ -23,3 +22,6 @@ source $(brew --prefix asdf)/asdf.sh
 #source $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 
 export DOCKER_BUILDKIT=1
+
+eval "$(rbenv init -)"
+

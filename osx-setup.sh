@@ -108,11 +108,25 @@ done
 
 log "Configuring git"
 
-git config --global pull.rebase false
-git config --global user.name "Michael Bianchi"
-git config --global user.email michaeldbianchi@gmail.com
-git config --global user.signingkey 792AB06934ACCEB8
-git config --global commit.gpgsign true
+if test ! $(git config --global --get pull.rebase); then
+  git config --global pull.rebase false
+fi
+
+if test ! $(git config --global --get user.name); then
+  git config --global user.name "Michael Bianchi"
+fi
+
+if test ! $(git config --global --get user.email); then
+  git config --global user.email michaeldbianchi@gmail.com
+fi
+
+if test ! $(git config --global --get user.signingkey); then
+  git config --global user.signingkey 792AB06934ACCEB8
+fi
+
+if test ! $(git config --global --get commit.gpgsign); then
+  git config --global commit.gpgsign true
+fi
 
 # Apps
 apps=(
