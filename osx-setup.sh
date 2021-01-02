@@ -112,7 +112,7 @@ if test ! $(git config --global --get pull.rebase); then
   git config --global pull.rebase false
 fi
 
-if test ! $(git config --global --get user.name); then
+if test ! $(git config --global --get user.name > /dev/null); then
   git config --global user.name "Michael Bianchi"
 fi
 
