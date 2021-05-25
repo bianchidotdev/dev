@@ -13,7 +13,7 @@ repository_branch="main"
 repo_dir=${HOME}/workspace/dev
 dir=${repo_dir}/dotfiles                    # dotfiles directory
 bckdir=${HOME}/.bck_dotfiles             # old dotfiles backup directory
-files="bashrc bash_prompt carbon-now.json config fzf.zsh gnupg psqlrc scripts sh_aliases sh_opploans sh_profile tmux.conf vimrc zshrc"    # list of files/folders to symlink in homedir
+files="bashrc bash_prompt carbon-now.json config fzf.zsh gitignore gnupg psqlrc scripts sh_aliases sh_opploans sh_profile tmux.conf vimrc zshrc"    # list of files/folders to symlink in homedir
 
 ##########
 

@@ -128,6 +128,10 @@ if test ! $(git config --global --get commit.gpgsign); then
   git config --global commit.gpgsign true
 fi
 
+if test ! $(git config --global --get core.excludesfile); then
+  git config --global core.excludesfile ~/.gitignore
+fi
+
 # Apps
 apps=(
   1password

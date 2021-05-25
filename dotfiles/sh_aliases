@@ -28,7 +28,7 @@ alias kbfs='cd /Volumes/Keybase'
 alias kbpr='cd /Volumes/Keybase/private/michaeldbianchi'
 alias kbpu='cd /Volumes/Keybase/public/michaeldbianchi'
 
-alias timestamp='date +"%Y%m%d%H%M"'
+alias timestamp='TZ="America/Chicago" date +"%Y%m%d%H%M"'
 
 alias ul='ultralist'
 
