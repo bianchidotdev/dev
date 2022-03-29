@@ -10,3 +10,7 @@ log/*
 !log/.keep
 dotfiles/config/gatsby/*
 !dotfiles/config/gatsby/config.json
+dotfiles/config/yarn
+/dotfiles/config/gh
+/dotfiles/config/iterm2
+/dotfiles/sh_opploans

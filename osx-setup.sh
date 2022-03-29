@@ -154,6 +154,9 @@ fi
 # tor-browser
 # virtualbox
 # zoom
+if test ! $(git config --global --get core.excludesfile); then
+  git config --global core.excludesfile ~/.gitignore
+fi
 
 # Apps
 apps=(

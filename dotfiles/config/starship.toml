@@ -24,9 +24,8 @@ add_newline = false
 
 # Replace the "➜" symbol in the prompt with "❯"
 [character]      # The name of the module we are confguring is "character"
-symbol = " λ"     # The "symbol" segment is being set to "❯"
-error_symbol = " λ"
-use_symbol_for_status = true
+success_symbol = "[ λ](bold green)"     # The "symbol" segment is being set to "❯"
+error_symbol= "[ λ](bold red)"     # The "symbol" segment is being set to "❯"
 
 [directory]
 truncation_length = 5
