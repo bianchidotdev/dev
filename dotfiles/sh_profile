@@ -25,3 +25,17 @@ export DOCKER_BUILDKIT=1
 
 eval "$(rbenv init -)"
 
+export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
+
+gpgconf --launch gpg-agent
+ln -sf /Users/bonky/.gnupg/S.gpg-agent.ssh /private/tmp/com.apple.launchd.lLsUWGF0sD/Listeners
+
+secret () {
+        output=~/"${1}".$(date +%s).enc
+        gpg --encrypt --armor --output ${output} -r 0x0000 -r 0x0001 -r 0x0002 "${1}" && echo "${1} -> ${output}"
+}
+
+reveal () {
+        output=$(echo "${1}" | rev | cut -c16- | rev)
+        gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
+}

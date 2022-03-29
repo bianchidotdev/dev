@@ -34,6 +34,18 @@ if [[ $(xcode-select -p 1>/dev/null) ]]; then
   fi 
 fi
 
+log "Copying down dev directory"
+cd $HOME
+mkdir -p workspace
+cd workspace
+if [[ ! -d ./dev ]]; then
+  echo "Copying dotfiles from Github"
+  git clone git@github.com:michaeldbianchi/dev.git
+else
+  cd dev
+  git pull
+fi
+
 # Check for Homebrew,
 # Install if we don't have it
 if test ! $(which brew); then
@@ -41,6 +53,24 @@ if test ! $(which brew); then
   brew_err=`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2>&1`
   if [ $? -ne 0 ]; then
     notify "$brew_err"
+    exit 1;
+  fi 
+fi
+
+if test ! $(which rustup); then
+  log "Installing rustup..."
+  rustup_err=`"curl https://sh.rustup.rs -sSf | sh -s -- -y" 2>&1`
+  if [ $? -ne 0 ]; then
+    notify "$rustup_err"
+    exit 1;
+  fi 
+fi
+
+if test ! $(which cargo); then
+  log "Installing rust..."
+  rust_err=`"rustup install stable" 2>&1`
+  if [ $? -ne 0 ]; then
+    notify "$rust_err"
     exit 1;
   fi 
 fi
@@ -54,40 +84,29 @@ if [ $? -ne 0 ]; then
   exit 1;
 fi 
 
+# bat
+# exa
+# fd
+# starship
+# tealdeer
+
 # CLI Tools
 formulae=(
-  act
   asdf
-  bat
-  coreutils
   docker
-  elixir
-  exa
-  fd
   fzf
-  gatsby-cli
   git
   gnupg
   gnutls
-  go
-  helm
-  httpie
   jq
   kubernetes-cli
-  legit
   minikube
   pinentry-mac
-  pulumi
   rbenv
   readline
   ruby-build
-  sqlite
-  starship
-  tealdeer
   terminal-notifier
   tmux
-  tmuxinator
-  watch
   wget
   zsh
 )
@@ -128,20 +147,21 @@ if test ! $(git config --global --get commit.gpgsign); then
   git config --global commit.gpgsign true
 fi
 
+# 1password
+# 1password-cli
+# brave-browser
+# spotify
+# tor-browser
+# virtualbox
+# zoom
+
 # Apps
 apps=(
-  1password
-  1password-cli
   bitbar
-  brave-browser
   docker
   iterm2
   postman
-  spotify
-  tor-browser
   vagrant
-  virtualbox
-  zoom
 )
 
 installed_casks=$(brew list --casks)
@@ -152,18 +172,6 @@ for i in "${apps[@]}"; do
     brew install --cask $i
   fi
 done
-
-# log "Installing brew manual taps"
-# if test ! $(which espanso); then
-#   brew tap federico-terzi/espanso
-#   brew install espanso
-# fi
-# if [[ $(espanso status) != *"running" ]]; then
-#   log "Configuring espanso"
-#   espanso register
-#   read -p "Press [Enter] key after enabling accessibility..."
-#   espanso start
-# fi
 
 log "Updating tldr"
 tldr --update
@@ -201,14 +209,7 @@ if [ "`tty`" != "not a tty" ]; then
   fi
 
   log "Installing dotfiles"
-  cd $HOME
-  mkdir -p workspace
-  cd workspace
-  if [[ ! -d ./dev ]]; then
-    echo "Copying dotfiles from Github"
-    git clone git@github.com:michaeldbianchi/dev.git
-  fi
-  cd dev
+  cd $HOME/workspace/dev
   sh dotfiles/install.sh
   echo "Successfully installed dotfiles"
 

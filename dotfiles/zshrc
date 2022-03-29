@@ -44,3 +44,4 @@ if [ -f '/Users/michaelbianchi/Downloads/google-cloud-sdk/completion.zsh.inc' ];
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
+. <(flux completion zsh)
