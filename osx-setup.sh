@@ -50,7 +50,7 @@ fi
 # Install if we don't have it
 if test ! $(which brew); then
   log "Installing homebrew..."
-  brew_err=`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2>&1`
+  brew_err=`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install)" 2>&1`
   if [ $? -ne 0 ]; then
     notify "$brew_err"
     exit 1;
@@ -59,7 +59,8 @@ fi
 
 if test ! $(which rustup); then
   log "Installing rustup..."
-  rustup_err=`"curl https://sh.rustup.rs -sSf | sh -s -- -y" 2>&1`
+  rustup_err=`"curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+ 2>&1`
   if [ $? -ne 0 ]; then
     notify "$rustup_err"
     exit 1;
@@ -93,15 +94,19 @@ fi
 # CLI Tools
 formulae=(
   asdf
-  docker
+  # docker
   fzf
   git
+  google-cloud-sdk
   gnupg
   gnutls
   jq
+  keybase
   kubernetes-cli
   minikube
+  ngrok
   pinentry-mac
+  pritunl
   rbenv
   readline
   ruby-build
@@ -139,14 +144,6 @@ if test ! $(git config --global --get user.email); then
   git config --global user.email michaeldbianchi@gmail.com
 fi
 
-if test ! $(git config --global --get user.signingkey); then
-  git config --global user.signingkey 792AB06934ACCEB8
-fi
-
-if test ! $(git config --global --get commit.gpgsign); then
-  git config --global commit.gpgsign true
-fi
-
 # 1password
 # 1password-cli
 # brave-browser
@@ -160,10 +157,6 @@ fi
 
 # Apps
 apps=(
-  bitbar
-  docker
-  iterm2
-  postman
   vagrant
 )
 

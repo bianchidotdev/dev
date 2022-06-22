@@ -1,5 +1,10 @@
 # Node
-npm-debug.log
+**/npm-debug.log
 
 # Mac
-.DS_Store
+**/.DS_Store
+
+# Intellij
+**/.idea
+
+**/.cache

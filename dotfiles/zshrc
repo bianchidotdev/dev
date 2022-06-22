@@ -9,46 +9,19 @@ compinit
 source ~/.sh_profile
 
 # zsh specific shell config
-# antigen
-source ~/.config/antigen.zsh
-
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-#antigen bundle git
-#antigen bundle pip
-#antigen bundle command-not-found
-#antigen bundle cargo
-#antigen bundle colored-man-pages
-antigen bundle compleat
-#antigen bundle docker
-#antigen bundle git-flow
-#antigen bundle mix
-#antigen bundle npm
-antigen bundle osx
-#antigen bundle rails
-antigen bundle rbenv
-#antigen bundle terraform
-#antigen bundle web-search
-antigen bundle z
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
-
-# Tell Antigen that you're done.
-antigen apply
 
 # Load the theme
 eval "$(starship init zsh)"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/michaelbianchi/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/michaelbianchi/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+# plugins
+source ~/.config/antigen.zsh
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/michaelbianchi/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/michaelbianchi/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+antigen use oh-my-zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+antigen bundle docker
+antigen bundle git
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
 
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-
-. <(flux completion zsh)
+antigen apply

@@ -1,6 +1,6 @@
 source ~/.sh_aliases
 # source ~/.sh_functions
-source ~/.sh_opploans
+[ -f ~/.sh_firehydrant ] && source ~/.sh_firehydrant
 
 # Default Editors
 export EDITOR=vim
@@ -8,10 +8,12 @@ export VISUAL=vim
 
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
+export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.google-cloud-sdk/bin:$PATH
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.emacs.d/bin
+export PATH=$PATH:$HOME/google-cloud-sdk/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
@@ -26,11 +28,9 @@ export DOCKER_BUILDKIT=1
 
 eval "$(rbenv init -)"
 
-<<<<<<< HEAD
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 
 gpgconf --launch gpg-agent
-ln -sf /Users/bonky/.gnupg/S.gpg-agent.ssh /private/tmp/com.apple.launchd.lLsUWGF0sD/Listeners
 
 secret () {
         output=~/"${1}".$(date +%s).enc
@@ -41,7 +41,12 @@ reveal () {
         output=$(echo "${1}" | rev | cut -c16- | rev)
         gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
 }
-=======
+
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
->>>>>>> 48bc501ca685e310334fd54695d2246a5604b684
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
+[ -f ~/google-cloud-sdk/completion.zsh.inc ] && source ~/google-cloud-sdk/completion.zsh.inc
+[ -f ~/google-cloud-sdk/path.zsh.inc ] && source ~/google-cloud-sdk/path.zsh.inc
