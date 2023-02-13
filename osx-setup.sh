@@ -93,25 +93,25 @@ fi
 
 # CLI Tools
 formulae=(
-  asdf
+  # asdf
   # docker
-  fzf
+  # fzf
   git
-  google-cloud-sdk
+  # google-cloud-sdk
   gnupg
   gnutls
   jq
-  keybase
-  kubernetes-cli
-  minikube
-  ngrok
-  pinentry-mac
-  pritunl
-  rbenv
-  readline
-  ruby-build
+  # keybase
+  # kubernetes-cli
+  # minikube
+  # ngrok
+  # pinentry-mac
+  # pritunl
+  # rbenv
+  # readline
+  # ruby-build
   terminal-notifier
-  tmux
+  # tmux
   wget
   zsh
 )
@@ -141,7 +141,7 @@ if test ! $(git config --global --get user.name > /dev/null); then
 fi
 
 if test ! $(git config --global --get user.email); then
-  git config --global user.email michaeldbianchi@gmail.com
+  git config --global user.email michael@bianchi.dev
 fi
 
 # 1password
@@ -155,32 +155,32 @@ if test ! $(git config --global --get core.excludesfile); then
   git config --global core.excludesfile ~/.gitignore
 fi
 
-# Apps
-apps=(
-  vagrant
-)
+# # Apps
+# apps=(
+#   vagrant
+# )
 
-installed_casks=$(brew list --casks)
+# installed_casks=$(brew list --casks)
 
-log "Installing brew casks"
-for i in "${apps[@]}"; do
-  if ! echo $installed_casks | grep "$i" > /dev/null; then
-    brew install --cask $i
-  fi
-done
+# log "Installing brew casks"
+# for i in "${apps[@]}"; do
+#   if ! echo $installed_casks | grep "$i" > /dev/null; then
+#     brew install --cask $i
+#   fi
+# done
 
-log "Updating tldr"
-tldr --update
+# log "Updating tldr"
+# tldr --update
 
 log "Cleaning up brew"
 brew cleanup
 
-# Iterm2 setup
-if [[ ! -f "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json" ]]; then
-  log "Configuring iterm2 dynamic profile"
-  mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
-  ln -s  $repo_dir/dotfiles/iterm-profiles.json "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json"
-fi
+# # Iterm2 setup
+# if [[ ! -f "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json" ]]; then
+#   log "Configuring iterm2 dynamic profile"
+#   mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+#   ln -s  $repo_dir/dotfiles/iterm-profiles.json "$HOME/Library/Application Support/iTerm2/DynamicProfiles/blualism.json"
+# fi
 
 log "Setting OSX settings"
 #"Setting screenshots location to $HOME/Desktop"
@@ -204,10 +204,10 @@ if [ "`tty`" != "not a tty" ]; then
     read -p "Press [Enter] key after this..."
   fi
 
-  log "Installing dotfiles"
-  cd $HOME/workspace/dev
-  sh dotfiles/install.sh
-  echo "Successfully installed dotfiles"
+  # log "Installing dotfiles"
+  # cd $HOME/workspace/dev
+  # sh dotfiles/install.sh
+  # echo "Successfully installed dotfiles"
 
   log "Setting up zsh"
   if [[ ! $(grep "/usr/local/bin/zsh" /etc/shells) ]]; then
@@ -219,8 +219,8 @@ if [ "`tty`" != "not a tty" ]; then
     chsh -s /usr/local/bin/zsh
   fi
 
-  log "Configuring cron"
-  (crontab -l ; cat $repo_dir/control/crontab) | sort - | uniq - | crontab -
+  # log "Configuring cron"
+  # (crontab -l ; cat $repo_dir/control/crontab) | sort - | uniq - | crontab -
 fi
 
 

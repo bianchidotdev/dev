@@ -22,16 +22,21 @@ export NVM_DIR="$HOME/.nvm"
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-source $(brew --prefix asdf)/asdf.sh
-#source $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+[ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
+[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh
 
 export DOCKER_BUILDKIT=1
 
-eval "$(rbenv init -)"
+
+if command -v rbenv &> /dev/null; then
+  eval "$(rbenv init -)"
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+if command -v kubectl >/dev/null 2>&1 /dev/null; then
+  source <(kubectl completion zsh)
+fi
 
 [ -f ~/google-cloud-sdk/completion.zsh.inc ] && source ~/google-cloud-sdk/completion.zsh.inc
 [ -f ~/google-cloud-sdk/path.zsh.inc ] && source ~/google-cloud-sdk/path.zsh.inc

@@ -14,7 +14,7 @@ alias exa='exa -al --git'
 alias b='bundle'
 alias be='bundle exec'
 
-alias dc='docker-compose'
+alias dc='docker compose'
 
 alias k='kubectl'
 
