@@ -14,7 +14,7 @@ alias exa='exa -al --git'
 alias b='bundle'
 alias be='bundle exec'
 
-alias dc='docker-compose'
+alias dc='docker compose'
 
 alias k='kubectl'
 
@@ -29,8 +29,6 @@ alias kbpr='cd /Volumes/Keybase/private/michaeldbianchi'
 alias kbpu='cd /Volumes/Keybase/public/michaeldbianchi'
 
 alias timestamp='TZ="America/Chicago" date +"%Y%m%d%H%M"'
-
-alias ul='ultralist'
 
 alias import_env='source ~/.scripts/import_envvars.sh'
 
