@@ -30,8 +30,6 @@ alias kbpu='cd /Volumes/Keybase/public/michaeldbianchi'
 
 alias timestamp='TZ="America/Chicago" date +"%Y%m%d%H%M"'
 
-alias ul='ultralist'
-
 alias import_env='source ~/.scripts/import_envvars.sh'
 
 alias mux=tmuxinator
