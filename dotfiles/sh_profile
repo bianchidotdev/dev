@@ -24,6 +24,10 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
 [ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh
+if command -v rtx &> /dev/null; then
+  eval "$(rtx activate zsh)"
+fi
+
 
 export DOCKER_BUILDKIT=1
 
@@ -40,3 +44,9 @@ fi
 
 [ -f ~/google-cloud-sdk/completion.zsh.inc ] && source ~/google-cloud-sdk/completion.zsh.inc
 [ -f ~/google-cloud-sdk/path.zsh.inc ] && source ~/google-cloud-sdk/path.zsh.inc
+
+#[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] && source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+#[ -f /nix/var/nix/profiles/default/etc/profile.d/nix.sh ] && source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
+source /Users/bianchi/.config/op/plugins.sh

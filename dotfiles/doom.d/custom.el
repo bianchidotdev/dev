@@ -10,3 +10,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(setq user-full-name "Michael Bianchi"
+      user-mail-address "michael@bianchi.dev")
+
+(setq auto-save-default t)
+
+(setq-default tab-width 2)
+
+(map! :map elixir-mode-map
+      :leader
+      "mcb" #'alchemist-compile-this-buffer
+      "meb" #'alchemist-execute-this-buffer)
