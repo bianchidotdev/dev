@@ -50,3 +50,5 @@ fi
 export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
 export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 source /Users/bianchi/.config/op/plugins.sh
+
+[ -f ~/.sh_freshpaint ] && source ~/.sh_freshpaint
