@@ -40,7 +40,7 @@ mkdir -p workspace
 cd workspace
 if [[ ! -d ./dev ]]; then
   echo "Copying dotfiles from Github"
-  git clone git@github.com:michaeldbianchi/dev.git
+  git clone git@github.com:bianchidotdev/dev.git
 else
   cd dev
   git pull
