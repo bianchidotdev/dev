@@ -15,6 +15,7 @@ export PATH=$PATH:$HOME/.config/emacs/bin
 export PATH=$PATH:$HOME/google-cloud-sdk/bin
 export PATH=$PATH:/usr/local/opt/openjdk/bin
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.bin:$PATH
 export PATH=$PATH:$HOME/.config/emacs/bin
 export PATH="$(brew --prefix)/opt/postgresql@15/bin:$PATH"
 
@@ -26,8 +27,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
 [ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh
-if command -v rtx &> /dev/null; then
-  eval "$(rtx activate zsh)"
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
 fi
 
 
@@ -54,3 +55,5 @@ export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 [ -f $HOME/.config/op/plugins.sh ] && source $HOME/.config/op/plugins.sh
 
 [ -f ~/.sh_freshpaint ] && source ~/.sh_freshpaint
+
+export STEPCI_DISABLE_ANALYTICS=true
