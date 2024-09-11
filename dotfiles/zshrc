@@ -1,16 +1,9 @@
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/mbianchi/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
 # shell agnostic loading
 source ~/.sh_profile
 
 # zsh specific shell config
 
-# Load the theme
+# Load the starship theme
 eval "$(starship init zsh)"
 
 # plugins
@@ -25,3 +18,4 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen apply
+
