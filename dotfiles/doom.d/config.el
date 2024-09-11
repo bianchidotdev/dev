@@ -120,8 +120,8 @@
         (message "graphics active"))
     (insert (shell-command-to-string paste-from-clipboard-cmd))))
 
-(evil-leader/set-key "o y" 'copy-to-clipboard)
-(evil-leader/set-key "o p" 'paste-from-clipboard)
+;; (evil-leader/set-key "o y" 'copy-to-clipboard)
+;; (evil-leader/set-key "o p" 'paste-from-clipboard)
 
 (setq mac-command-modifier      'control
       ns-command-modifier       'control
@@ -131,3 +131,14 @@
       ns-right-option-modifier  'meta)
 
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . js-mode))
+
+;; lsp configuration
+(with-eval-after-load 'eglot
+  (setf (alist-get '(elixir-mode elixir-ts-mode heex-ts-mode)
+                   eglot-server-programs
+                   nil nil #'equal)
+        (if (and (fboundp 'w32-shell-dos-semantics)
+                 (w32-shell-dos-semantics))
+            '("language_server.bat")
+          (eglot-alternatives
+           '("language_server.sh" "start_lexical.sh")))))
