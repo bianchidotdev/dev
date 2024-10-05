@@ -1,0 +1,15 @@
+alias venv='source venv/bin/activate'
+
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+alias cd..='cd ..'
+
+alias b='bundle'
+alias be='bundle exec'
+
+alias dc='docker compose'
+
+alias k='kubectl'
+
+alias mux=tmuxinator

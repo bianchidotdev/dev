@@ -1,0 +1,12 @@
+# Node
+**/npm-debug.log
+
+# Mac
+**/.DS_Store
+
+# Intellij
+**/.idea
+
+**/.cache
+
+/local/

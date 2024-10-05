@@ -1,0 +1,59 @@
+source ~/.sh_aliases
+# source ~/.sh_functions
+[ -f ~/.sh_firehydrant ] && source ~/.sh_firehydrant
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Default Editors
+export EDITOR=vim
+export VISUAL=vim
+
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.google-cloud-sdk/bin:$PATH
+export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/google-cloud-sdk/bin
+export PATH=$PATH:/usr/local/opt/openjdk/bin
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.bin:$PATH
+export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH="$(brew --prefix)/opt/postgresql@15/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+[ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
+[ -f $(brew --prefix asdf)/libexec/asdf.sh ] && source $(brew --prefix asdf)/libexec/asdf.sh
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+
+export DOCKER_BUILDKIT=1
+
+
+if command -v rbenv &> /dev/null; then
+  eval "$(rbenv init -)"
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if command -v kubectl >/dev/null 2>&1 /dev/null; then
+  source <(kubectl completion zsh)
+fi
+
+[ -f ~/google-cloud-sdk/completion.zsh.inc ] && source ~/google-cloud-sdk/completion.zsh.inc
+[ -f ~/google-cloud-sdk/path.zsh.inc ] && source ~/google-cloud-sdk/path.zsh.inc
+
+#[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] && source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+#[ -f /nix/var/nix/profiles/default/etc/profile.d/nix.sh ] && source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
+[ -f $HOME/.config/op/plugins.sh ] && source $HOME/.config/op/plugins.sh
+
+[ -f ~/.sh_freshpaint ] && source ~/.sh_freshpaint
+
+export STEPCI_DISABLE_ANALYTICS=true
