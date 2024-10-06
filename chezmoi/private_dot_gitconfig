@@ -7,7 +7,7 @@
 [user]
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJU8trwbM7ygZ+8qNGNHoJ42+N4YdeXikJa0HfhCV0oI
 	name = Bianchi
-	email = michael@bianchi.dev
+	email = m@bianchi.dev
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
