@@ -33,6 +33,7 @@ cask "1password-cli"
 cask "dash"
 cask "devpod"
 # cask "discord"
+cask "firefox"
 # cask "iterm2" # maybe switch to alacritty or kitty
 cask "little-snitch"
 cask "logseq"
