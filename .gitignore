@@ -16,3 +16,5 @@ dotfiles/config/op
 dotfiles/config/yarn
 dotfiles/sh_opploans
 dotfiles/config/sops
+
+Brewfile.lock.json
