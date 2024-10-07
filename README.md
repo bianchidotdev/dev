@@ -1,15 +1,29 @@
 # Development Environemnt
 
+This is now managed by [chezmoi](https://www.chezmoi.io/).
+
+Install homebrew && `chezmoi`:
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc && source ~/.zshrc
+brew install chezmoi
 ```
-git clone git@github.com:michaeldbianchi/dev.git
-cd dev
-./osx-setup.sh
+
+Initialize `chezmoi`:
 ```
+chezmoi init --apply https://github.com/bianchidotdev/dev.git
+```
+
+## What happens
+
+* Chezmoi syncs all dotfiles in the `chezmoi/` directory (check what these are using `chezmoi managed`)
+* Rosetta is installed
+* Screenshots are redirected to `~/Documents/screenshots`
+* Homebrew packages in `chezmoi/Brewfile` are installed
 
 ## Roadmap
 
-- Set up cron schedule to run on a regular basis
-- Output text and error logs to files that can be used for debugging
-- Set up iterm notifier when something is broken
-- Add in `brew doctor` and `brew outdated` tasks
-- Fix VSCode settings transfer
+* Template-ify `Brewfile`
+* Dash sync setup
+* logseq configuration
