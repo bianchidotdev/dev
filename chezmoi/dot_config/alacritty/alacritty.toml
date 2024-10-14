@@ -1,6 +1,4 @@
-import = [
-    "~/.config/alacritty/themes/themes/blualism.toml"
-]
+import = ["~/.config/alacritty/themes/blualism.toml"]
 
 [selection]
 save_to_clipboard = true
