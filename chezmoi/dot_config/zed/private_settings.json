@@ -9,15 +9,14 @@
 {
   "assistant": {
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
     },
     "version": "2"
   },
   "features": {
     "inline_completion_provider": "supermaven"
   },
-  "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
@@ -25,8 +24,24 @@
     "light": "One Light",
     "dark": "One Dark"
   },
+  "vim_mode": true,
   "telemetry": {
     "diagnostics": false,
     "metrics": false
+  },
+  "tab_size": 2,
+  "lsp": {
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "schemas": {
+            "https://json.schemastore.org/circleciconfig.json": [
+              "/.circleci/**/*.yml",
+              "/.circleci/**/*.yaml"
+            ]
+          }
+        }
+      }
+    }
   }
 }
