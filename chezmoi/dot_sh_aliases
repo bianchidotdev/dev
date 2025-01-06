@@ -13,3 +13,7 @@ alias dc='docker compose'
 alias k='kubectl'
 
 alias mux=tmuxinator
+
+alias l='eza -lAh'
+alias ls='eza'
+alias ll='eza -l'

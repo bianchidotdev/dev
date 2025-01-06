@@ -6,16 +6,76 @@ source ~/.sh_profile
 # Load the starship theme
 eval "$(starship init zsh)"
 
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+eval "$(atuin init zsh)"
+
 # plugins
-source ~/.config/antigen.zsh
+# source ~/.config/antigen.zsh
+# 
+# antigen use oh-my-zsh
+# 
+# antigen bundle docker
+# antigen bundle git
+# antigen bundle zsh-users/zsh-completions
+# antigen bundle zsh-users/zsh-autosuggestions
+# antigen bundle zsh-users/zsh-syntax-highlighting
+# 
+# antigen apply
 
-antigen use oh-my-zsh
 
-antigen bundle docker
-antigen bundle git
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
+# Set up Zsh options. There are many of these that can be tweaked!
+# See: https://zsh.sourceforge.io/Doc/Release/Options.html
+setopt alwaystoend
+setopt appendhistory
+setopt autocd
+setopt autolist
+setopt automenu
+setopt autopushd
+setopt completeinword
+setopt correct
+setopt extendedhistory
+setopt histexpiredupsfirst
+setopt histignoredups
+setopt histignorespace
+setopt histverify
+setopt interactivecomments
+setopt listpacked
+setopt longlistjobs
+setopt nocaseglob
+setopt noflowcontrol
+setopt promptsubst
+setopt pushdignoredups
+setopt pushdminus
+setopt sharehistory
 
-antigen apply
+export HISTSIZE=10000
+export SAVEHIST=10000
 
+
+# Trick out the zsh completion engine.
+# See: https://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_23.html
+# The following lines were added by compinstall
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+zstyle ':completion:*' max-errors 1
+zstyle ':completion:*' menu select=0
+zstyle ':completion:*' original true
+zstyle ':completion:*' prompt 'Did you mean?'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' verbose true
+autoload -Uz compinit
+compinit
+
+# Run zsh-syntax-highlighting (installed via homebrew).
+# See: https://github.com/zsh-users/zsh-syntax-highlighting
+[ -f $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
