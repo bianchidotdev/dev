@@ -6,7 +6,7 @@ softwareupdate --install-rosetta --agree-to-license
 
 {{ if (eq .chezmoi.os "darwin") -}}
 # Set default screenshot location
-defaults write com.apple.screencapture "location" -string "~/Documents/Screenshots" && killall SystemUIServer
+defaults write com.apple.screencapture "location" -string "~/Documents/screenshots" && killall SystemUIServer
 
 brew bundle
 {{ end -}}
