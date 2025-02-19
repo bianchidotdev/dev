@@ -1,4 +1,4 @@
-# Development Environemnt
+# Development Environment
 
 This is now managed by [chezmoi](https://www.chezmoi.io/).
 
