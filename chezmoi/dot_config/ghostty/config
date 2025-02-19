@@ -1,3 +1,3 @@
 theme = blualism
 
-copy-on-select = true
+copy-on-select = clipboard
