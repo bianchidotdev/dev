@@ -2,6 +2,7 @@
 elixir = "1.18"
 go = "latest"
 erlang = "27"
+bun = "latest"
 
 [settings]
 experimental = true
