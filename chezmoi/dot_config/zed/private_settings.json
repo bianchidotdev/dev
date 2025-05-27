@@ -7,7 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-4o"
